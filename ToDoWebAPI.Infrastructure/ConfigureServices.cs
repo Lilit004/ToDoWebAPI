@@ -10,6 +10,9 @@ using ToDoWebAPI.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using ToDoWebAPI.Domain.Repository;
 using ToDoWebAPI.Infrastructure.Repository;
+using Convey;
+using Convey.Docs.Swagger;
+using Convey.CQRS.Queries;
 
 
 namespace ToDoWebAPI.Infrastructure
@@ -24,6 +27,8 @@ namespace ToDoWebAPI.Infrastructure
                     ?? throw new InvalidOperationException())
             );
             services.AddTransient<IToDoRepository, ToDoRepository>();
+            services.AddConvey().AddSwaggerDocs();
+            services.AddConvey().AddQueryHandlers();
             return services;
         }
     }

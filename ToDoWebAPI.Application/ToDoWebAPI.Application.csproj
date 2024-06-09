@@ -8,6 +8,9 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Convey.CQRS.Commands" Version="1.1.448" />
+    <PackageReference Include="Convey.CQRS.Queries" Version="1.1.448" />
+    <PackageReference Include="Convey.Docs.Swagger" Version="1.1.448" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
   </ItemGroup>

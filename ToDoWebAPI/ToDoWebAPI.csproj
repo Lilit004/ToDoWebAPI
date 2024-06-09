@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Convey" Version="1.1.448" />
+    <PackageReference Include="Convey.CQRS.Commands" Version="1.1.448" />
+    <PackageReference Include="Convey.CQRS.Queries" Version="1.1.448" />
+    <PackageReference Include="Convey.Docs.Swagger" Version="1.1.448" />
+    <PackageReference Include="Convey.WebApi" Version="1.1.448" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

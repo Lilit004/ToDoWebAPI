@@ -7,6 +7,12 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using FluentValidation;
 using MediatR;
+using Convey;
+using Convey.Docs.Swagger;
+using Microsoft.AspNetCore.Builder;
+using Convey.CQRS.Commands;
+using Microsoft.Extensions.Hosting;
+using Convey.CQRS.Queries;
 
 
 namespace ToDoWebAPI.Application
@@ -23,7 +29,14 @@ namespace ToDoWebAPI.Application
             cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ToDos.Common.Behaviour.ValidationBehaviour<,>));
             });
 
+            
+            services.AddConvey().AddSwaggerDocs();
+            services.AddConvey().AddQueryHandlers().AddInMemoryQueryDispatcher();
+            
+            
             return services;
         }
+
+        
     }
 }
