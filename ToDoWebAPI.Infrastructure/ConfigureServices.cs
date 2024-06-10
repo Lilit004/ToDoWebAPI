@@ -13,6 +13,7 @@ using ToDoWebAPI.Infrastructure.Repository;
 using Convey;
 using Convey.Docs.Swagger;
 using Convey.CQRS.Queries;
+using Convey.CQRS.Commands;
 
 
 namespace ToDoWebAPI.Infrastructure
@@ -28,7 +29,8 @@ namespace ToDoWebAPI.Infrastructure
             );
             services.AddTransient<IToDoRepository, ToDoRepository>();
             services.AddConvey().AddSwaggerDocs();
-            services.AddConvey().AddQueryHandlers();
+            services.AddConvey().AddQueryHandlers().AddInMemoryQueryDispatcher();
+            services.AddConvey().AddCommandHandlers().AddInMemoryCommandDispatcher();
             return services;
         }
     }

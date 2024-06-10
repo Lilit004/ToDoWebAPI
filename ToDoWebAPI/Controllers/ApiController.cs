@@ -8,9 +8,6 @@ namespace ToDoWebAPI.Controllers
     [ApiController]
     public class ApiController : ControllerBase
     {
-        //private ISender _mediatr;
-
         
-        //protected ISender Mediatr => _mediatr ??= HttpContext.RequestServices.GetRequiredService<ISender>();
     }
 }

@@ -5,9 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ToDoWebAPI.Domain.Entities;
+using Convey.CQRS.Queries;
 namespace ToDoWebAPI.Application.ToDos.Query.GetToDos
+    
 {
-    public class GetToDosQuery : IRequest<List<ToDoVm>>
+    public class GetToDosQuery : IQuery<List<ToDoVm>>
     {
     }
 }

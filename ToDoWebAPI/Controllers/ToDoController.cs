@@ -23,22 +23,14 @@ namespace ToDoWebAPI.Controllers
             _commandDispatcher = commandDispatcher;
             _queryDispatcher = queryDispatcher;
         }
-        /*[HttpGet]
+        
+        [HttpGet]
         public async Task<IActionResult> GetToDos()
         {
-            var todos = await Mediatr.Send(new GetToDosQuery());
+            var todos = await _queryDispatcher.QueryAsync(new GetToDosQuery());
             return Ok(todos);
-        }*/
-        /*
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetToDoById(int id)
-        {
-            var todo = await Mediatr.Send(new GetToDoByIdQuery() { ToDoId = id});
-            if(todo == null) 
-                return NotFound();
-            else
-                return Ok(todo);
-        }*/
+        }
+        
         [HttpGet("{id}")]
         public async Task<IActionResult> GetToDoById(int id)
         { 
@@ -46,29 +38,30 @@ namespace ToDoWebAPI.Controllers
             return Ok(todo);
         }
 
-          /*  [HttpPost]
-        public async Task<IActionResult> CreateToDo(CreateToDoCommand command)
+        [HttpPost]
+        public async Task<ActionResult> CreateToDo(CreateToDoCommand command)
         {
-            var todo = await  Mediatr.Send(command);
-            return CreatedAtAction(nameof(GetToDoById), new {Id = todo.Id}, todo);
+            
+            await _commandDispatcher.SendAsync(command);
+            return CreatedAtAction(nameof(GetToDoById), new {Id = command.Id},null);
         }
-
+        
         [HttpPut("{id}")]
 
-        public async Task<IActionResult> UpdateToDo(UpdateToDoCommand command,int id)
+        public async Task<ActionResult> UpdateToDo(UpdateToDoCommand command,int id)
         {
             if(id != command.Id)
                 return BadRequest();
-            await Mediatr.Send(command);
+            await _commandDispatcher.SendAsync(command);
             return NoContent();
 
         }
-
+        
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteToDo(int id)
+        public async Task<ActionResult> DeleteToDo(int id)
         {
-            await Mediatr.Send(new DeleteToDoCommand { ToDoId = id});
+            await _commandDispatcher.SendAsync(new DeleteToDoCommand { ToDoId = id});
             return NoContent();
-        }*/
+        }
     }
 }

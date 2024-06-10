@@ -7,28 +7,31 @@ using System.Text;
 using System.Threading.Tasks;
 using ToDoWebAPI.Domain.Entities;
 using ToDoWebAPI.Domain.Repository;
+using Convey.CQRS.Commands;
 
 namespace ToDoWebAPI.Application.ToDos.Commands.UpdateToDo
 {
-    public class UpdateToDoCommandHandler : IRequestHandler<UpdateToDoCommand, int>
+    public class UpdateToDoCommandHandler : ICommandHandler<UpdateToDoCommand>
     {
         private readonly IToDoRepository _todorepository;
-        private readonly IMapper _mapper;
-        public UpdateToDoCommandHandler(IToDoRepository todorepository,IMapper mapper)
+        
+        public UpdateToDoCommandHandler(IToDoRepository todorepository)
         {
             _todorepository = todorepository;
-            _mapper = mapper;
+            
         }
-        public async  Task<int> Handle(UpdateToDoCommand request, CancellationToken cancellationToken)
+        
+
+        public async Task HandleAsync(UpdateToDoCommand command, CancellationToken cancellationToken = default)
         {
             var todo = new ToDo();
-            todo.Id = request.Id;
-            todo.Name = request.Name;
-            if (request.Completed == true)
+            todo.Id = command.Id;
+            todo.Name = command.Name;
+            if (command.Completed == true)
                 todo.ToDoStatusesId = 1;
             else
                 todo.ToDoStatusesId = 2;
-            return await _todorepository.UpdateToDo(request.Id, todo);
+            await _todorepository.UpdateToDo(command.Id, todo);
         }
     }
 }

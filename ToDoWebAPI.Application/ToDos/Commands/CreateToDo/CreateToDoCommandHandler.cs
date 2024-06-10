@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 using ToDoWebAPI.Application.ToDos.Query.GetToDoById;
 using ToDoWebAPI.Domain.Entities;
 using ToDoWebAPI.Domain.Repository;
+using Convey.CQRS.Commands;
 
 namespace ToDoWebAPI.Application.ToDos.Commands.CreateToDo
 {
-    public class CreateToDoCommandHandler : IRequestHandler<CreateToDoCommand, ToDoVm>
+    public class CreateToDoCommandHandler : ICommandHandler<CreateToDoCommand>
     {
        
             private readonly IToDoRepository _todorepository;
@@ -22,22 +23,23 @@ namespace ToDoWebAPI.Application.ToDos.Commands.CreateToDo
                 _todorepository = todorepository;
                 _mapper = mapper;
             }
-            public async  Task<ToDoVm> Handle(CreateToDoCommand request, CancellationToken cancellationToken)
+            
+
+        public async Task HandleAsync(CreateToDoCommand command, CancellationToken cancellationToken = default)
+        {
+            var todo = new ToDo();
+            todo.Id = command.Id;
+            todo.Name = command.Name;
+            if (command.Completed)
             {
-                var todo = new ToDo();
-                todo.Id = request.Id;
-                todo.Name = request.Name;
-                if(request.Completed)
-                {
-                    todo.ToDoStatusesId = 1;
-                }
-                else
-                {
-                    todo.ToDoStatusesId = 2;
-                }
-                var result = await _todorepository.CreateToDo(todo);
-                return  _mapper.Map<ToDoVm>(result);
-                
+                todo.ToDoStatusesId = 1;
             }
+            else
+            {
+                todo.ToDoStatusesId = 2;
+            }
+            var result = await _todorepository.CreateToDo(todo);
+            
+        }
     }
 }

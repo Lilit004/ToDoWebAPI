@@ -6,23 +6,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ToDoWebAPI.Domain.Repository;
+using Convey.CQRS.Commands;
 
 namespace ToDoWebAPI.Application.ToDos.Commands.DeleteToDo
 {
-    public class DeleteToDoCommandHandler : IRequestHandler<DeleteToDoCommand, int>
+    public class DeleteToDoCommandHandler : ICommandHandler<DeleteToDoCommand>
     {
         
         private readonly IToDoRepository _todorepository;
-        private readonly IMapper _mapper;
-        public DeleteToDoCommandHandler(IToDoRepository todorepository, IMapper mapper)
+       
+        public DeleteToDoCommandHandler(IToDoRepository todorepository)
         {
             _todorepository = todorepository;
-            _mapper = mapper;
+            
         }
 
-        public async Task<int> Handle(DeleteToDoCommand request, CancellationToken cancellationToken)
+        
+
+        public async Task HandleAsync(DeleteToDoCommand command, CancellationToken cancellationToken = default)
         {
-            return await _todorepository.DeleteToDo(request.ToDoId);
+             await _todorepository.DeleteToDo(command.ToDoId);
         }
     }
 }
