@@ -13,9 +13,10 @@ namespace ToDoWebAPI.Application.ToDos.Commands.CreateToDo
         {
             
             RuleFor(v => v.Name).NotEmpty().WithMessage("Name is required");
-
+            RuleFor(v => v.Completed).NotEmpty().WithMessage("Status is required");
             
         }
         
     }
 }
+

@@ -28,12 +28,15 @@ namespace ToDoWebAPI.Infrastructure.Repository
 
         public async Task<int> DeleteToDo(int id)
         {
-            return await _context.ToDos.Where(model => model.Id == id).ExecuteDeleteAsync();
+             
+             return await _context.ToDos.Where(model => model.Id == id).ExecuteDeleteAsync();
         }
 
         public async Task<ToDo> GetToDoById(int id)
         {
+            
             return await _context.ToDos.AsNoTracking().FirstOrDefaultAsync(model => model.Id == id);
+            
         }
 
         public async Task<List<ToDo>> GetToDos()
@@ -52,5 +55,7 @@ namespace ToDoWebAPI.Infrastructure.Repository
             return await _context.SaveChangesAsync();
             
         }
+
+        
     }
 }

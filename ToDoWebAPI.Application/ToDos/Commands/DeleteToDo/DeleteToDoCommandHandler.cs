@@ -12,20 +12,21 @@ namespace ToDoWebAPI.Application.ToDos.Commands.DeleteToDo
 {
     public class DeleteToDoCommandHandler : ICommandHandler<DeleteToDoCommand>
     {
-        
+
         private readonly IToDoRepository _todorepository;
-       
+
         public DeleteToDoCommandHandler(IToDoRepository todorepository)
         {
             _todorepository = todorepository;
-            
+
         }
 
-        
+
 
         public async Task HandleAsync(DeleteToDoCommand command, CancellationToken cancellationToken = default)
         {
-             await _todorepository.DeleteToDo(command.ToDoId);
+            await _todorepository.DeleteToDo(command.ToDoId);
+
         }
     }
 }

@@ -32,9 +32,9 @@ namespace ToDoWebAPI.Controllers
         }
         
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetToDoById(int id)
-        { 
-            var todo = await _queryDispatcher.QueryAsync(new GetToDoByIdQuery(){ ToDoId =  id});
+        public async Task<IActionResult> GetToDoById([FromQuery]GetToDoByIdQuery query)
+        {
+            var todo = await _queryDispatcher.QueryAsync(new GetToDoByIdQuery() { ToDoId = query.ToDoId});
             return Ok(todo);
         }
 
@@ -51,17 +51,22 @@ namespace ToDoWebAPI.Controllers
         public async Task<ActionResult> UpdateToDo(UpdateToDoCommand command,int id)
         {
             if(id != command.Id)
+            {
                 return BadRequest();
+            }
             await _commandDispatcher.SendAsync(command);
             return NoContent();
 
         }
         
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteToDo(int id)
+        public async Task<ActionResult> DeleteToDo(DeleteToDoCommand command)
         {
-            await _commandDispatcher.SendAsync(new DeleteToDoCommand { ToDoId = id});
-            return NoContent();
+            
+                await _commandDispatcher.SendAsync(command);
+                return NoContent();
+            
+            
         }
     }
 }

@@ -31,6 +31,7 @@ namespace ToDoWebAPI.Infrastructure
             services.AddConvey().AddSwaggerDocs();
             services.AddConvey().AddQueryHandlers().AddInMemoryQueryDispatcher();
             services.AddConvey().AddCommandHandlers().AddInMemoryCommandDispatcher();
+            
             return services;
         }
     }

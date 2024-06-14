@@ -14,8 +14,7 @@ namespace ToDoWebAPI.Infrastructure.Data
         {
             
         }
-        
-
+       
         public DbSet<ToDo> ToDos { get; set; }
 
         public DbSet<ToDoStatus> ToDoStatuses { get; set; }

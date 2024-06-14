@@ -29,6 +29,7 @@ namespace ToDoWebAPI.Application.ToDos.Query.GetToDoById
             var todo = await _todorepository.GetToDoById(query.ToDoId);
             var todoVm = _mapper.Map<ToDoVm>(todo);
             return todoVm;
+            
         }
     }
 }
