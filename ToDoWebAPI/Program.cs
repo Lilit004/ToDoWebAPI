@@ -6,17 +6,9 @@ using MediatR;
 using Microsoft.AspNetCore.Diagnostics;
 using ToDoWebAPI.Application;
 using ToDoWebAPI.Application.ToDos.Commands.DeleteToDo;
-
-
 using ToDoWebAPI.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
-
-
-builder.Services.AddApplicationServices();
-builder.Services.AddInfrastructureServices(builder.Configuration);
-
-builder.Services.AddTransient<IValidator<DeleteToDoCommand>, DeleteToDoCommandValidator>();
 
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices();

@@ -34,7 +34,7 @@ namespace ToDoWebAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetToDoById([FromQuery]GetToDoByIdQuery query)
         {
-            var todo = await _queryDispatcher.QueryAsync(new GetToDoByIdQuery() { ToDoId = query.ToDoId});
+            var todo = await _queryDispatcher.QueryAsync(query);
             return Ok(todo);
         }
 

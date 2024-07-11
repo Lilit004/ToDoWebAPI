@@ -17,10 +17,6 @@ using FluentValidation.Internal;
 using System.Globalization;
 using ToDoWebAPI.Application.ToDos.Commands.DeleteToDo;
 using ToDoWebAPI.Application.ToDos.Commands.UpdateToDo;
-
-
-using ToDoWebAPI.Application.ToDos.Commands.CreateToDo;
-using ToDoWebAPI.Domain.Repository;
 using ToDoWebAPI.Application.ToDos.Query.GetToDoById;
 
 
@@ -49,8 +45,6 @@ namespace ToDoWebAPI.Application
             services.AddFluentValidationClientsideAdapters();
 
             services.AddConvey().AddSwaggerDocs();
-            services.AddConvey().AddQueryHandlers().AddInMemoryQueryDispatcher();
-            services.AddConvey().AddCommandHandlers().AddInMemoryQueryDispatcher();
 
 
             return services;
